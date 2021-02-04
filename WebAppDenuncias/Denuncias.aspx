@@ -60,7 +60,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-8 border">
                 <h3>Listado</h3>
-                <asp:GridView ID="grdListaDenuncias" runat="server" CssClass="table table-hover table-borderless table-responsive-sm" OnRowCommand="grdListaDenuncias_RowCommand">
+                <asp:GridView ID="grdListaDenuncias" runat="server" CssClass="table table-hover table-borderless table-responsive-sm" OnRowDataBound="grdListaDenuncias_RowDataBound" OnRowCommand="grdListaDenuncias_RowCommand">
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>

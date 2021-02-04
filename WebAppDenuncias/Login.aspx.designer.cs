@@ -11,43 +11,43 @@ namespace WebAppDenuncias
 {
 
 
-    public partial class SiteMaster
+    public partial class _Default
     {
 
         /// <summary>
-        /// Control navbarDropdown.
+        /// Control txtCorreo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navbarDropdown;
+        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
 
         /// <summary>
-        /// Control lblUser.
+        /// Control txtPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUser;
+        protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
-        /// Control mnuCerrarSesion.
+        /// Control btnAcceder.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton mnuCerrarSesion;
+        protected global::System.Web.UI.WebControls.Button btnAcceder;
 
         /// <summary>
-        /// Control MainContent.
+        /// Control lblRegistrarse.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.LinkButton lblRegistrarse;
     }
 }

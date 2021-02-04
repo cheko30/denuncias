@@ -89,12 +89,14 @@
                     <div class="form-inline my-2 my-lg-0">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario
+                                <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" runat="server" href="#">Perfil</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" runat="server" href="#">Cerrar sesión</a>
+                                    <asp:LinkButton ID="mnuCerrarSesion" class="dropdown-item" runat="server" OnClick="mnuCerrarSesion_Click">Cerrar sesión</asp:LinkButton>
+                                    
                                 </div>
                             </li>
                         </ul>

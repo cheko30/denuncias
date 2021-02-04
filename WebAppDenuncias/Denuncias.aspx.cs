@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 using WebAppDenuncias.model;
 using System.Data.SqlClient;
+using System.Drawing;
 
 
 namespace WebAppDenuncias
@@ -30,7 +31,7 @@ namespace WebAppDenuncias
 
         private void listarDenuncias()
         {
-            string sql = "SELECT d.id AS 'Folio', d.descripcion, d.fechaSuceso, d.fechaRegistro, td.id, td.descripcion AS 'tipoDenuncia', u.nombre + ' ' + u.apellidoPaterno + ' ' + u.apellidoMaterno AS 'nombre' FROM denuncias d INNER JOIN catEstatus e ON e.id = d.statusFK INNER JOIN catTipoDenuncias td ON td.id = d.tipoDenunciaFK INNER JOIN usuarios u ON u.id = d.usuarioFK";
+            string sql = "SELECT d.id AS 'Folio', d.descripcion AS 'Descripción', d.fechaSuceso AS 'Fecha', d.fechaRegistro, td.id, td.descripcion AS 'Delito', u.nombre + ' ' + u.apellidoPaterno + ' ' + u.apellidoMaterno AS 'nombre' FROM denuncias d INNER JOIN catEstatus e ON e.id = d.statusFK INNER JOIN catTipoDenuncias td ON td.id = d.tipoDenunciaFK INNER JOIN usuarios u ON u.id = d.usuarioFK";
             DataSet dataSet = conexion.getData(sql);
             if(dataSet.Tables[0].Rows.Count > 0)
             {
@@ -168,6 +169,25 @@ namespace WebAppDenuncias
             else
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "alert(false, 'Ocurrio un error al actualizar la denuncia');", true);
+            }
+        }
+
+        protected void grdListaDenuncias_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[5].Visible = false;
+            e.Row.Cells[6].Visible = false;
+            e.Row.Cells[8].Visible = false;
+            if(e.Row.RowType == DataControlRowType.DataRow)
+            {
+                System.Console.WriteLine(e.Row.Cells[5].Text);
+
+                if(e.Row.Cells[6].Text == "3")
+                {
+                    e.Row.BackColor = Color.LightCyan;
+                }
+                {
+
+                }
             }
         }
     }
