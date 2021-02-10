@@ -14,13 +14,21 @@ namespace WebAppDenuncias
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["dataUser"] != null)
-            {
+             {
                 Usuario usuario = (Usuario)Session["dataUser"];
                 lblUser.Text = usuario.nombre + " " + usuario.apellidoPaterno;
-            } else
+                if(usuario.rolFK == 2)
+                {
+                    lnkListadoDenuncias.Visible = true;
+                }
+
+            }
+            else
             {
                 Response.Redirect("Login.aspx");
             }
+
+            
         }
 
         protected void mnuCerrarSesion_Click(object sender, EventArgs e)
@@ -28,6 +36,11 @@ namespace WebAppDenuncias
             Session.Remove("dataUser");
             Response.Redirect("Login.aspx");
 
+        }
+
+        protected void lnkListadoDenuncias_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListDenuncias.aspx");
         }
     }
 }

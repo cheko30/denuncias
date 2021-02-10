@@ -1,16 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListDenuncias.aspx.cs" Inherits="WebAppDenuncias.ListDenuncias" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListDenuncias.aspx.cs" Inherits="WebAppDenuncias.ListDenuncias" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="MainContent">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <h3>Listado de Denuncias</h3>
+                <asp:GridView ID="grdListaDenuncias" runat="server" CssClass="table table-hover table-borderless table-responsive-sm" OnRowDataBound="grdListaDenuncias_RowDataBound" OnRowCommand="grdListaDenuncias_RowCommand">
+                </asp:GridView>
+            </div>
+            <div class="col-12 col-md-2"></div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</asp:Content>

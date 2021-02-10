@@ -17,20 +17,54 @@ namespace WebAppDenuncias
     {   
         
         Conexion conexion;
+        Usuario usuario;
         static int idDenuncia = 0;
+        string correo;
         protected void Page_Load(object sender, EventArgs e)
         {
             conexion = new Conexion();
+
+            if (Session["dataUser"] != null)
+            {
+                usuario = (Usuario)Session["dataUser"];
+                txtUsuario.Text = usuario.nombre + " " + usuario.apellidoPaterno;
+                txtUsuario.ReadOnly = true;
+                correo = usuario.correo;
+            }
+
             if (!IsPostBack)
             {
                 listarTipos();
                 listarDenuncias();
             }
 
+
         }
 
         private void listarDenuncias()
         {
+            if(correo != null)
+            {
+                string sp = "spDenuncias";
+                Denuncias denuncias = new Denuncias();
+                List<SqlParameter> listParameters = new List<SqlParameter>();
+                listParameters.Add(new SqlParameter("@opcion", SqlDbType.Int) { Value = 5 });
+                listParameters.Add(new SqlParameter("@correo", SqlDbType.NVarChar) { Value = correo });
+                DataSet dataSet = conexion.getData(sp, listParameters.ToArray());
+                if(dataSet.Tables.Count > 0)
+                {
+                    if (dataSet.Tables[0].Rows.Count > 0)
+                    {
+                        grdListaDenuncias.DataSource = dataSet;
+                        grdListaDenuncias.DataBind();
+                    }
+                }
+                
+            }
+
+            
+
+            /*
             string sql = "SELECT d.id AS 'Folio', d.descripcion AS 'Descripción', d.fechaSuceso AS 'Fecha', d.fechaRegistro, td.id, td.descripcion AS 'Delito', u.nombre + ' ' + u.apellidoPaterno + ' ' + u.apellidoMaterno AS 'nombre' FROM denuncias d INNER JOIN catEstatus e ON e.id = d.statusFK INNER JOIN catTipoDenuncias td ON td.id = d.tipoDenunciaFK INNER JOIN usuarios u ON u.id = d.usuarioFK";
             DataSet dataSet = conexion.getData(sql);
             if(dataSet.Tables[0].Rows.Count > 0)
@@ -38,6 +72,7 @@ namespace WebAppDenuncias
                 grdListaDenuncias.DataSource = dataSet;
                 grdListaDenuncias.DataBind();
             }
+            */
 
         }
 
@@ -60,7 +95,7 @@ namespace WebAppDenuncias
             denunciaModel.fechaSuceso = (Convert.ToDateTime(txtFechaSuceso.Text)).ToString("yyyy-MM-dd hh:mm:ss");
             denunciaModel.descripcion = txtDescripcion.Text;
             denunciaModel.statusFK = (int)Estatus.Activo;
-            denunciaModel.usuarioFK = Convert.ToInt32(txtUsuario.Text);
+            denunciaModel.usuarioFK = usuario.id;
             denunciaModel.tipoDenunciaFK = Convert.ToInt32(drpTipo.SelectedValue);
 
             if (registrarDenuncia(denunciaModel,1))
@@ -179,7 +214,6 @@ namespace WebAppDenuncias
             e.Row.Cells[8].Visible = false;
             if(e.Row.RowType == DataControlRowType.DataRow)
             {
-                System.Console.WriteLine(e.Row.Cells[5].Text);
 
                 if(e.Row.Cells[6].Text == "3")
                 {

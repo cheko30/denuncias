@@ -26,7 +26,7 @@
     <br />
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 ">
+            <div class="col-12 col-md-6 col-lg-4">
                 <h3>Registro</h3>
                 <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                 <div class="form-group">
@@ -37,6 +37,7 @@
                 <div class="form-group">
                     <label for="txtDescripcion">Desripción</label>
                     <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" TextMode="MultiLine" required></asp:TextBox>
+                    
                 </div>
                 <div class="form-group">
                     <label for="drpTipo">Tipo Delito</label>

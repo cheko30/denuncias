@@ -138,30 +138,22 @@ namespace WebAppDenuncias.model
             return sqlConnection;
         }
 
-        public DataSet getDataUser(string sp, SqlParameter[] sqlParameters)
+        public DataSet getData(string sp, SqlParameter[] sqlParameters)
         {
-            /*DataSet dataSet = new DataSet();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("spGestionUsuarios", sqlConnection);
-            sqlDataAdapter.Fill(dataSet);
-            return dataSet;*/
-
-            SqlConnection sqlConnection = null;
-            SqlCommand sqlCommand = null;
             DataSet dataSet = new DataSet();
             SqlDataAdapter sqlDataAdapter;
             try
             {
-                sqlConnection = getConecction();
+                SqlConnection sqlConnection = getConecction();
                 using (sqlConnection)
                 {
-                    sqlCommand = new SqlCommand(sp, sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(sp, sqlConnection);
                     using (sqlCommand)
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
                         sqlCommand.Parameters.AddRange(sqlParameters);
                         sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                        sqlDataAdapter.Fill(dataSet);
-                        
+                        sqlDataAdapter.Fill(dataSet);   
                     }
                 }
             }

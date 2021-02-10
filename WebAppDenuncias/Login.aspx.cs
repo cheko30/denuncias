@@ -12,7 +12,7 @@ using WebAppDenuncias.model;
 
 namespace WebAppDenuncias
 {
-    public partial class _Default : Page
+    public partial class Login : Page
     {
         Conexion conexion;
         protected void Page_Load(object sender, EventArgs e)
@@ -31,6 +31,8 @@ namespace WebAppDenuncias
                     id = Convert.ToInt32(dataSet.Tables[0].Rows[0][0].ToString()),
                     nombre = dataSet.Tables[0].Rows[0][1].ToString(),
                     apellidoPaterno = dataSet.Tables[0].Rows[0][2].ToString(),
+                    correo = dataSet.Tables[0].Rows[0][7].ToString(),
+                    rolFK = Convert.ToInt32(dataSet.Tables[0].Rows[0][9].ToString())
                 };
 
                 Session.Add("dataUser", usuario);
@@ -53,7 +55,7 @@ namespace WebAppDenuncias
             listParametros.Add(new SqlParameter("@opcion", SqlDbType.Int) { Value = 1});
             listParametros.Add(new SqlParameter("@correo", SqlDbType.NVarChar) { Value = usuario.correo.Trim()});
             listParametros.Add(new SqlParameter("@password", SqlDbType.NVarChar) { Value = usuario.password.Trim()});
-            return conexion.getDataUser(sp, listParametros.ToArray());
+            return conexion.getData(sp, listParametros.ToArray());
            
         }
 
